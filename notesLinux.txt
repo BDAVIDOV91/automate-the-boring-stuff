@@ -1,0 +1,34 @@
+cd - change directory
+ls - list items in directory ( -la - list all items)
+rm - Remove item ( -rf - remove folder)
+mv - Rename / move file(folder)
+mkdir - create folder
+. - current directory
+.. - parent directory  (cd .. - go to parent directory)
+.(ime na papkata) - hidden file
+/ - root directory  (osnovna direktoriq (MY PC ))
+~ - home directory (user  (c\users\bobi)) - windows  | /home/bdavidov - linux
+code .  - open Visual Studio Code (VSCode) in current directory
+F2 - Rename(folder, file, variable, function)
+ctrl + l - mr.proper(clear screen)
+ctrl + c - interrupt (program, loop, etc.)
+ctrl + d - logout  (example : shut down /logout)
+history - poslednite 500 komandi
+$ - non admin 
+# - pure admin
+sudo - "run as administrator"
+su - "super user"
+
+
+REAL STUFF
+
+loggin всеки път да се стартира ако е нова сесия 
+
+eval `ssh-agent`  - стартиране на ssh 
+ssh-add ~/.ssh/personalKey    - добавяне на ключ към ssh keyring 
+
+
+git status   -  показва текущи промени по локалното репо
+git add "file name"   - добавя съответния файл към 'stage'
+git commit -m "commit name"    - отразява добавените промени на текущия 'бранч'
+git push   -   изпраща всички commit-и към remote
