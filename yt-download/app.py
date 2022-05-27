@@ -1,39 +1,24 @@
-#from pytube import YouTube
-
-# yt = YouTube('https://www.youtube.com/watch?v=XIZBxIQX10g')
-# yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download()
-
-#YouTube("https://www.youtube.com/watch?v=XIZBxIQX10g").streams.filter(only_audio=True).order_by('resolution').desc().first().download()
-
 from pytube import YouTube
-import os
 import subprocess
-import time
+import os
 
-cwd = os.getcwd()
+downloadDirectory = '/mnt/c/users/bobi/Desktop'
 
-while True:
-    url = input("URL: ")
+youTubeLink = input('turi linka: ')
+fileName = input('name: ')
+fileExtensionMp4 = 'mp4'
+fileExtensionMp3 = 'mp3'
+mp4File = f'{fileName}.{fileExtensionMp4}'
+mp3File = f'{fileName}.{fileExtensionMp3}'
 
-    # Title and Time
-    print("...")
-    # print(((YouTube(url)).title), "//", (int(var1)/60),"mins")
-    # print("...")
-
-    # Filename specification
-    # Prevents any errors during conversion due to illegal characters in name
-    _filename = input("Filename: ")
-
-    # Downloading
-    print("Downloading....")
-    YouTube(url).streams.first().download(filename=_filename)
-    time.sleep(1)
-
-    # Converting
-    mp4 = "'%s'.mp4" % cwd + _filename
-    mp3 = "./'%s'.mp3" % _filename
-    ffmpeg = ('ffmpeg -i %s ' % mp4 + mp3)
-    subprocess.call(ffmpeg, shell=True)
-
-    # Completion
-    print("\nCOMPLETE\n")
+youTube = YouTube(youTubeLink)
+streams = youTube.streams
+filteredStreams = streams.filter(progressive=True, file_extension=fileExtensionMp4)
+streamsOrderedByResolution = filteredStreams.order_by('resolution').desc()
+firstStream = streamsOrderedByResolution.first()
+firstStream.download(downloadDirectory, filename = mp4File)
+ffmpeg = f'ffmpeg -i {downloadDirectory}/{mp4File} -f mp3 -ab 320000 -vn {downloadDirectory}/{mp3File}'
+print(f'Converting {mp4File} to {mp3File}')
+subprocess.call(ffmpeg, shell=True)
+os.remove(f'{downloadDirectory}/{mp4File}')
+print('\nGotoo\n')
